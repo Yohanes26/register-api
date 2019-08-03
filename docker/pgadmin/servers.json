@@ -1,0 +1,44 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "user-middleware",
+            "Group": "Servers",
+            "Port": 5432,
+            "Username": "root",
+            "Host": "localhost",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "erpmiddleware",
+            "PassFile": "/home/pgpass.conf"
+        },
+        "2": {
+            "Name": "product-middleware",
+            "Group": "Servers",
+            "Port": 5433,
+            "Username": "root",
+            "Host": "localhost",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "productmiddleware",
+            "PassFile": "/home/pgpass.conf"
+        },
+        "3": {
+            "Name": "location",
+            "Group": "Servers",
+            "Port": 5434,
+            "Username": "root",
+            "Host": "localhost",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "location",
+            "PassFile": "/home/pgpass.conf"
+        },
+        "4": {
+            "Name": "contract-middleware",
+            "Group": "Servers",
+            "Port": 5435,
+            "Username": "root",
+            "Host": "localhost",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "contractmiddleware",
+            "PassFile": "/home/pgpass.conf"
+        }
+    }
+}

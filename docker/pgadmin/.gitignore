@@ -1,0 +1,4 @@
+data/*
+./data/*
+data/pgadmin4.db
+dumps/*

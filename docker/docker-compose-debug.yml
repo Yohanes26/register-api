@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+
+  register-db:
+    extends:
+      file: docker-compose-dependencies-base.yml
+      service: register-db
+      
+  pgadmin:
+    extends:
+      file: docker-compose-dependencies-base.yml
+      service: pgadmin
+    depends_on:
+      - register-db
+
+networks:
+     register-network:
+          driver: bridge

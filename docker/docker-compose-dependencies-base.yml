@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+
+  register-db:
+    build:
+      context: register-db
+    container_name: register-db
+    ports:
+      - "5432:5432"
+    networks:
+      - register-network
+      
+  pgadmin:
+    image:  dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+       - PGADMIN_DEFAULT_EMAIL=admin
+       - PGADMIN_DEFAULT_PASSWORD=admin
+       - PGADMIN_LISTEN_PORT=5050
+       - PGPASSWORD=123456
+    volumes:
+      - ./pgadmin/data:/var/lib/pgadmin
+      - ./pgadmin/servers.json:/pgadmin4/servers.json
+      - ./pgadmin/dumps:/var/lib/pgadmin/storage/admin
+    network_mode: host
+    ports:
+     - "80:5050"
+
+networks:
+     register-network:
+          driver: bridge

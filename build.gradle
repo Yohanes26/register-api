@@ -1,0 +1,130 @@
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+buildscript {
+    ext {
+        springBootVersion = '2.1.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+
+repositories {
+    jcenter()
+}
+
+task buildSubModules() {
+}
+
+
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
+           
+    compile("org.springframework.boot:spring-boot-starter-hateoas:${springBootVersion}")
+		
+	compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+		    
+    implementation 'commons-io:commons-io:2.6'
+    
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.1.0.RELEASE'
+
+	compile group: 'ma.glasnost.orika', name: 'orika-core', version: '1.5.2'
+    
+	compile group: 'org.jboss.resteasy', name: 'resteasy-client', version: '3.6.3.Final'
+	compile('org.jboss.resteasy:resteasy-jettison-provider:3.6.3.Final')
+	compile('org.jboss.resteasy:resteasy-jackson2-provider:3.6.3.Final')
+    
+	implementation("io.springfox:springfox-swagger2:2.8.0")
+	
+	implementation("io.springfox:springfox-swagger-ui:2.8.0")	
+	
+	testImplementation('com.h2database:h2:1.4.190')
+	
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+	
+	testCompile("org.springframework.boot:spring-boot-test-autoconfigure:${springBootVersion}")
+	
+	testCompile("org.springframework:spring-test")
+	
+	testCompile("junit:junit")
+	
+	testCompile("org.assertj:assertj-core")
+	
+	testCompile("org.mockito:mockito-core")
+	
+	testCompile("com.jayway.jsonpath:json-path")
+	
+	testCompile("org.hamcrest:hamcrest-core")
+	
+	testCompile("org.hamcrest:hamcrest-library")
+	
+	testCompile("org.skyscreamer:jsonassert")
+	
+	testCompile("org.mockito:mockito-core")
+
+}
+
+ext.copyJar = { directoryName ->
+    copy {
+        from 'build/libs'
+        include '*.jar'
+        rename '(.+)-[0-9]*\\.[0-9]*\\.jar', '$1.jar'
+        into 'docker/register-api'
+    }
+}
+
+build {
+    doLast {
+        copyJar('register-api')
+    }
+}
+
+
+
+task buildDockerCompose(dependsOn: build) {
+    doLast {
+        exec {
+            workingDir '.'
+            commandLine 'docker-compose', '-f', 'docker/docker-compose.yml', 'build'
+        }
+    }
+}
+
+task runDockerCompose(dependsOn:buildDockerCompose) {
+    doLast {
+        exec {
+            workingDir '.'
+            commandLine 'docker-compose', '-f', 'docker/docker-compose.yml', 'up'
+        }
+    }
+}
+
+task buildDockerComposeDebug() {
+    doLast {
+        exec {
+            workingDir '.'
+            commandLine 'docker-compose', '-f', 'docker/docker-compose-debug.yml', 'build'
+        }
+    }
+}
+
+task runDockerComposeDebug(dependsOn: buildDockerComposeDebug) {
+    doLast {
+        exec {
+            workingDir '.'
+            commandLine 'docker-compose', '-f', 'docker/docker-compose-debug.yml', 'up'
+        }
+    }
+}
+
