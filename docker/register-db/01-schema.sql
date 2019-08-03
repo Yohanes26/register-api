@@ -65,7 +65,7 @@ SET default_with_oids = false;
 CREATE TABLE clients.clients (
     id bigint NOT NULL,
     name character varying(255) NOT NULL,
-    age integer(3) NOT NULL,
+    age bigint NOT NULL,
     created_at timestamp without time zone NOT NULL
 );
 
@@ -257,8 +257,6 @@ CREATE TABLE clients.weather (
     client_id bigint NOT NULL,
     max_temp DECIMAL(7,5),
     min_temp DECIMAL(7,5),
-    woeid bigint,
-    latt_long character varying(80),
     applicable_date timestamp without time zone,
     created_at timestamp without time zone NOT NULL
 );
