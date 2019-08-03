@@ -66,6 +66,7 @@ CREATE TABLE clients.clients (
     id bigint NOT NULL,
     name character varying(255) NOT NULL,
     age integer(3) NOT NULL,
+    created_at timestamp without time zone NOT NULL
 );
 
 
@@ -184,10 +185,10 @@ ALTER TABLE ONLY clients.geolocation
 
 
 --
--- Name: weather; Type: TABLE; Schema: clients; Owner: root
+-- Name: woeid; Type: TABLE; Schema: clients; Owner: root
 --
 
-CREATE TABLE clients.weather (
+CREATE TABLE clients.woeid (
     id bigint NOT NULL,
     client_id bigint NOT NULL,
     distance bigint,
@@ -195,6 +196,71 @@ CREATE TABLE clients.weather (
     location_type character varying(120),
     woeid bigint,
     latt_long character varying(80),
+    created_at timestamp without time zone NOT NULL
+);
+
+ALTER TABLE clients.woeid OWNER TO root;
+
+--
+--
+--
+
+
+--
+-- Name: woeid_seq; Type: SEQUENCE; Schema: clients; Owner: root
+--
+
+CREATE SEQUENCE clients.woeid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE clients.woeid_seq OWNER TO root;
+
+--
+--
+--
+
+
+--
+-- Name: woeid_pkey; Type: CONSTRAINT; Schema: clients; Owner: root
+--
+
+ALTER TABLE ONLY clients.woeid ADD CONSTRAINT woeid_pkey PRIMARY KEY (id);
+
+--
+--
+--
+
+
+--
+-- Name: woeid_fkey; Type: CONSTRAINT; Schema: clients; Owner: root
+--
+
+ALTER TABLE ONLY clients.woeid
+    ADD CONSTRAINT woeid_fkey FOREIGN KEY (client_id) REFERENCES clients.clients(id) ON DELETE CASCADE;
+
+--
+--
+--
+
+
+--
+-- Name: weather; Type: TABLE; Schema: clients; Owner: root
+--
+
+CREATE TABLE clients.weather (
+    id bigint NOT NULL,
+    client_id bigint NOT NULL,
+    max_temp DECIMAL(7,5),
+    min_temp DECIMAL(7,5),
+    woeid bigint,
+    latt_long character varying(80),
+    applicable_date timestamp without time zone,
+    created_at timestamp without time zone NOT NULL
 );
 
 ALTER TABLE clients.weather OWNER TO root;
@@ -244,6 +310,7 @@ ALTER TABLE ONLY clients.weather
 --
 --
 --
+
 
 --
 -- PostgreSQL database dump complete
