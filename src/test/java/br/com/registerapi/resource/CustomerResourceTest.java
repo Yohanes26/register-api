@@ -31,7 +31,7 @@ public class CustomerResourceTest {
 	}
 	
 	@Test
-	public void testCreateCustomer() {
+	public void testCreateCustomer() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/v1/customer")
 					.accept(MediaType.APPLICATION_JSON_UTF8)
@@ -41,7 +41,7 @@ public class CustomerResourceTest {
 	}
 	
 	@Test
-	public void testUpdateCustomer() {
+	public void testUpdateCustomer() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.put("/v1/customer")
 		)
@@ -49,7 +49,7 @@ public class CustomerResourceTest {
 	}
 	
 	@Test
-	public void testGetCustomerById() {
+	public void testGetCustomerById() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/v1/customer/{id}")
 					.accept(MediaType.APPLICATION_JSON_UTF8)
@@ -59,7 +59,7 @@ public class CustomerResourceTest {
 	}
 	
 	@Test
-	public void testGetAllCustomers() {
+	public void testGetAllCustomers() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/v1/customers")
 					.accept(MediaType.APPLICATION_JSON_UTF8)
@@ -69,7 +69,7 @@ public class CustomerResourceTest {
 	}
 	
 	@Test
-	public void testDeleteCustomerById() {
+	public void testDeleteCustomerById() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/v1/customer/{id}")
 		)
