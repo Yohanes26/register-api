@@ -26,16 +26,48 @@ public class CustomerEntity {
     @Column(name = "id")
     @GeneratedValue(generator = "customerGenerator")
     @SequenceGenerator(name = "customerGenerator", schema = "customers", sequenceName = "customer_seq", allocationSize = 1)
-    public Long id;
+    private Long id;
     
     @Column(name = "name")
-    public String name;
+    private String name;
     
     @Column(name = "age")
-    public Integer age;
+    private Integer age;
     
     @CreationTimestamp
     @Column(name = "created_at")
-    public Timestamp createAt;
+    private Timestamp createAt;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public Timestamp getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Timestamp createAt) {
+		this.createAt = createAt;
+	}
 
 }
