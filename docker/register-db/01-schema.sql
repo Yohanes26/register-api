@@ -20,13 +20,13 @@ SET row_security = off;
 --
 
 --
--- Name: clients; Type: SCHEMA; Schema: -; Owner: root
+-- Name: customers; Type: SCHEMA; Schema: -; Owner: root
 --
 
-CREATE SCHEMA clients;
+CREATE SCHEMA customers;
 
 
-ALTER SCHEMA clients OWNER TO root;
+ALTER SCHEMA customers OWNER TO root;
 
 --
 --
@@ -59,10 +59,10 @@ SET default_with_oids = false;
 --
 
 --
--- Name: clients; Type: TABLE; Schema: clients; Owner: root
+-- Name: customers; Type: TABLE; Schema: customers; Owner: root
 --
 
-CREATE TABLE clients.clients (
+CREATE TABLE customers.customers (
     id bigint NOT NULL,
     name character varying(255) NOT NULL,
     age bigint NOT NULL,
@@ -70,17 +70,17 @@ CREATE TABLE clients.clients (
 );
 
 
-ALTER TABLE clients.clients OWNER TO root;
+ALTER TABLE customers.customers OWNER TO root;
 
 --
 --
 --
 
 --
--- Name: clients_seq; Type: SEQUENCE; Schema: clients; Owner: root
+-- Name: customers_seq; Type: SEQUENCE; Schema: customers; Owner: root
 --
 
-CREATE SEQUENCE clients.clients_seq
+CREATE SEQUENCE customers.customers_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -88,41 +88,41 @@ CREATE SEQUENCE clients.clients_seq
     CACHE 1;
 
 
-ALTER TABLE clients.clients_seq OWNER TO root;
+ALTER TABLE customers.customers_seq OWNER TO root;
 
 --
 --
 --
 
 --
--- Name: clients_pkey; Type: CONSTRAINT; Schema: clients; Owner: root
+-- Name: customers_pkey; Type: CONSTRAINT; Schema: customers; Owner: root
 --
 
-ALTER TABLE ONLY clients.clients ADD CONSTRAINT clients_pkey PRIMARY KEY (id);
-
---
---
---
-
---
--- Name: clients_idx; Type: INDEX; Schema: clients; Owner: root
---
-
-create index clients_idx on clients.clients (id);
-
+ALTER TABLE ONLY customers.customers ADD CONSTRAINT customers_pkey PRIMARY KEY (id);
 
 --
 --
 --
 
+--
+-- Name: customers_idx; Type: INDEX; Schema: customers; Owner: root
+--
+
+create index customers_idx on customers.customers (id);
+
 
 --
--- Name: geolocation; Type: TABLE; Schema: clients; Owner: root
+--
 --
 
-CREATE TABLE clients.geolocation (
+
+--
+-- Name: geolocation; Type: TABLE; Schema: customers; Owner: root
+--
+
+CREATE TABLE customers.geolocation (
     id bigint NOT NULL,
-    client_id bigint NOT NULL,
+    customer_id bigint NOT NULL,
     ipv4 character varying(20),
     continent_name character varying(55),
     country_name character varying(55),
@@ -134,7 +134,7 @@ CREATE TABLE clients.geolocation (
     created_at timestamp without time zone NOT NULL
 );
 
-ALTER TABLE clients.geolocation OWNER TO root;
+ALTER TABLE customers.geolocation OWNER TO root;
 
 
 --
@@ -143,10 +143,10 @@ ALTER TABLE clients.geolocation OWNER TO root;
 
 
 --
--- Name: geolocation_seq; Type: SEQUENCE; Schema: clients; Owner: root
+-- Name: geolocation_seq; Type: SEQUENCE; Schema: customers; Owner: root
 --
 
-CREATE SEQUENCE clients.geolocation_seq
+CREATE SEQUENCE customers.geolocation_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -154,7 +154,7 @@ CREATE SEQUENCE clients.geolocation_seq
     CACHE 1;
 
 
-ALTER TABLE clients.geolocation_seq OWNER TO root;
+ALTER TABLE customers.geolocation_seq OWNER TO root;
 
 --
 --
@@ -162,22 +162,10 @@ ALTER TABLE clients.geolocation_seq OWNER TO root;
 
 
 --
--- Name: geolocation_pkey; Type: CONSTRAINT; Schema: clients; Owner: root
+-- Name: geolocation_pkey; Type: CONSTRAINT; Schema: customers; Owner: root
 --
 
-ALTER TABLE ONLY clients.geolocation ADD CONSTRAINT geolocation_pkey PRIMARY KEY (id);
-
---
---
---
-
-
---
--- Name: geolocation_fkey; Type: CONSTRAINT; Schema: clients; Owner: root
---
-
-ALTER TABLE ONLY clients.geolocation
-    ADD CONSTRAINT geolocation_fkey FOREIGN KEY (client_id) REFERENCES clients.clients(id) ON DELETE CASCADE;
+ALTER TABLE ONLY customers.geolocation ADD CONSTRAINT geolocation_pkey PRIMARY KEY (id);
 
 --
 --
@@ -185,12 +173,24 @@ ALTER TABLE ONLY clients.geolocation
 
 
 --
--- Name: woeid; Type: TABLE; Schema: clients; Owner: root
+-- Name: geolocation_fkey; Type: CONSTRAINT; Schema: customers; Owner: root
 --
 
-CREATE TABLE clients.woeid (
+ALTER TABLE ONLY customers.geolocation
+    ADD CONSTRAINT geolocation_fkey FOREIGN KEY (customer_id) REFERENCES customers.customers(id) ON DELETE CASCADE;
+
+--
+--
+--
+
+
+--
+-- Name: woeid; Type: TABLE; Schema: customers; Owner: root
+--
+
+CREATE TABLE customers.woeid (
     id bigint NOT NULL,
-    client_id bigint NOT NULL,
+    customer_id bigint NOT NULL,
     distance bigint,
     title character varying(120),
     location_type character varying(120),
@@ -199,7 +199,7 @@ CREATE TABLE clients.woeid (
     created_at timestamp without time zone NOT NULL
 );
 
-ALTER TABLE clients.woeid OWNER TO root;
+ALTER TABLE customers.woeid OWNER TO root;
 
 --
 --
@@ -207,10 +207,10 @@ ALTER TABLE clients.woeid OWNER TO root;
 
 
 --
--- Name: woeid_seq; Type: SEQUENCE; Schema: clients; Owner: root
+-- Name: woeid_seq; Type: SEQUENCE; Schema: customers; Owner: root
 --
 
-CREATE SEQUENCE clients.woeid_seq
+CREATE SEQUENCE customers.woeid_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -218,7 +218,7 @@ CREATE SEQUENCE clients.woeid_seq
     CACHE 1;
 
 
-ALTER TABLE clients.woeid_seq OWNER TO root;
+ALTER TABLE customers.woeid_seq OWNER TO root;
 
 --
 --
@@ -226,22 +226,10 @@ ALTER TABLE clients.woeid_seq OWNER TO root;
 
 
 --
--- Name: woeid_pkey; Type: CONSTRAINT; Schema: clients; Owner: root
+-- Name: woeid_pkey; Type: CONSTRAINT; Schema: customers; Owner: root
 --
 
-ALTER TABLE ONLY clients.woeid ADD CONSTRAINT woeid_pkey PRIMARY KEY (id);
-
---
---
---
-
-
---
--- Name: woeid_fkey; Type: CONSTRAINT; Schema: clients; Owner: root
---
-
-ALTER TABLE ONLY clients.woeid
-    ADD CONSTRAINT woeid_fkey FOREIGN KEY (client_id) REFERENCES clients.clients(id) ON DELETE CASCADE;
+ALTER TABLE ONLY customers.woeid ADD CONSTRAINT woeid_pkey PRIMARY KEY (id);
 
 --
 --
@@ -249,19 +237,31 @@ ALTER TABLE ONLY clients.woeid
 
 
 --
--- Name: weather; Type: TABLE; Schema: clients; Owner: root
+-- Name: woeid_fkey; Type: CONSTRAINT; Schema: customers; Owner: root
 --
 
-CREATE TABLE clients.weather (
+ALTER TABLE ONLY customers.woeid
+    ADD CONSTRAINT woeid_fkey FOREIGN KEY (customer_id) REFERENCES customers.customers(id) ON DELETE CASCADE;
+
+--
+--
+--
+
+
+--
+-- Name: weather; Type: TABLE; Schema: customers; Owner: root
+--
+
+CREATE TABLE customers.weather (
     id bigint NOT NULL,
-    client_id bigint NOT NULL,
+    customer_id bigint NOT NULL,
     max_temp DECIMAL(7,5),
     min_temp DECIMAL(7,5),
     applicable_date timestamp without time zone,
     created_at timestamp without time zone NOT NULL
 );
 
-ALTER TABLE clients.weather OWNER TO root;
+ALTER TABLE customers.weather OWNER TO root;
 
 --
 --
@@ -269,10 +269,10 @@ ALTER TABLE clients.weather OWNER TO root;
 
 
 --
--- Name: weather_seq; Type: SEQUENCE; Schema: clients; Owner: root
+-- Name: weather_seq; Type: SEQUENCE; Schema: customers; Owner: root
 --
 
-CREATE SEQUENCE clients.weather_seq
+CREATE SEQUENCE customers.weather_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -280,7 +280,7 @@ CREATE SEQUENCE clients.weather_seq
     CACHE 1;
 
 
-ALTER TABLE clients.weather_seq OWNER TO root;
+ALTER TABLE customers.weather_seq OWNER TO root;
 
 --
 --
@@ -288,10 +288,10 @@ ALTER TABLE clients.weather_seq OWNER TO root;
 
 
 --
--- Name: weather_pkey; Type: CONSTRAINT; Schema: clients; Owner: root
+-- Name: weather_pkey; Type: CONSTRAINT; Schema: customers; Owner: root
 --
 
-ALTER TABLE ONLY clients.weather ADD CONSTRAINT weather_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY customers.weather ADD CONSTRAINT weather_pkey PRIMARY KEY (id);
 
 --
 --
@@ -299,11 +299,11 @@ ALTER TABLE ONLY clients.weather ADD CONSTRAINT weather_pkey PRIMARY KEY (id);
 
 
 --
--- Name: weather_fkey; Type: CONSTRAINT; Schema: clients; Owner: root
+-- Name: weather_fkey; Type: CONSTRAINT; Schema: customers; Owner: root
 --
 
-ALTER TABLE ONLY clients.weather
-    ADD CONSTRAINT weather_fkey FOREIGN KEY (client_id) REFERENCES clients.clients(id) ON DELETE CASCADE;
+ALTER TABLE ONLY customers.weather
+    ADD CONSTRAINT weather_fkey FOREIGN KEY (customer_id) REFERENCES customers.customers(id) ON DELETE CASCADE;
 
 --
 --
