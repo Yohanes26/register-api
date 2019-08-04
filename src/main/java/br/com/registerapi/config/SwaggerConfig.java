@@ -33,38 +33,18 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.any())              
                 .paths(PathSelectors.any())                          
                 .build()   
-                .apiInfo(metaInfo())
-                .securitySchemes(Lists.newArrayList(apiKey()))
-                .securityContexts(Arrays.asList(securityContext()));
-    }
-	
-    private SecurityContext securityContext() {
-        return SecurityContext.builder().securityReferences(defaultAuth())
-                .forPaths(PathSelectors.any()).build();
-    }
-    
-    private ApiKey apiKey() {
-        return new ApiKey("apiKey", "Authorization", "header");
-    }
-    
-    private List<SecurityReference> defaultAuth() {
-        final AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-        final AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-
-        authorizationScopes[0] = authorizationScope;
-
-        return Arrays.asList(new SecurityReference("apiKey", authorizationScopes));
+                .apiInfo(metaInfo());
     }
 
     private ApiInfo metaInfo() {
 
     	@SuppressWarnings("rawtypes")
 		ApiInfo apiInfo = new ApiInfo(
-                "Vila Show - API REST",
+                "Register - API REST",
                 "API REST",
                 "1.0",
                 "Terms of Service",
-                new Contact("Yohanes Lopes Gonçalves", "https://www.vilashow.com.br",
+                new Contact("Yohanes Lopes Gonçalves", "",
                         "yohaneslopes@gmail.com"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licesen.html", new ArrayList<VendorExtension>()
