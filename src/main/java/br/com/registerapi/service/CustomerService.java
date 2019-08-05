@@ -107,6 +107,23 @@ public class CustomerService {
 		return listCustomerModel;
 	}
 	
+	@Transactional
+	public void deleteCustomerById(Long id) {
+		
+		if (id == null) {
+			throw new ApiException("Id não pode ser nulo", 400);
+		}
+		
+		CustomerEntity customerEntity = customerRepository.getOne(id);
+		
+		if (!Objects.nonNull(customerEntity)) {
+			String msg = "Dados não encontrados para o ID: {}";
+			throw new ApiException(String.format(msg, id), 404);
+		}	
+		
+		customerRepository.delete(customerEntity);
+	}
+	
 	private void fillEntity(CustomerEntity customerEntity, CustomerModel customerModel) {
 		customerEntity.setCustomerEntity(customerModel.getName(), customerModel.getAge());
 	}
