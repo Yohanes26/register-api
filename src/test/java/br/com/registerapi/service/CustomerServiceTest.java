@@ -1,7 +1,9 @@
 package br.com.registerapi.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.times;
 
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.hamcrest.collection.IsEmptyCollection;
@@ -21,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import br.com.registerapi.config.ApiException;
 import br.com.registerapi.entity.CustomerEntity;
 import br.com.registerapi.model.CustomerModel;
 import br.com.registerapi.repository.CustomerRepository;
@@ -44,9 +48,52 @@ public class CustomerServiceTest {
 	}
 	
 	@Test
-    public void whenFindAll_thenReturnListCustomers() {     
+    public void whenCreateCustomer_thenReturnCustomerWithId() { 
+		// given
+		CustomerModel customerModel = new CustomerModel();
+		customerModel.setCustomerModel("Pedro Paulo", 70);
+		
         // when
+		CustomerEntity customerEntity = new CustomerEntity();
+		customerEntity = customerService.create(customerModel, null);
+     
+        // then
+		if (Objects.nonNull(customerEntity)) {
+			assertThat(customerEntity.getId(), notNullValue());
+		} else {
+			assertThat(customerEntity, notNullValue());
+		}
+		
+    }
+	
+	@Test
+    public void whenUpdateCustomer_thenReturnCustomerNewValue() { 
+		// given
+		CustomerModel customerModel = new CustomerModel();
+		customerModel.setCustomerModel("Pedro Paulo", 70);
+		
+        // when
+		CustomerEntity customerEntity = new CustomerEntity();
+		customerEntity = customerService.updateCustomer(1L, customerModel);
+     
+        // then
+		if (Objects.nonNull(customerEntity)) {
+			assertThat(customerEntity.getId(), notNullValue());
+		} else {
+			assertThat(customerEntity, notNullValue());
+		}
+		
+		assertThat(customerEntity.getName(), is(customerModel.getName()));
+		assertThat(customerEntity.getAge(), is(customerModel.getAge()));
+		
+    }
+	
+	@Test
+    public void whenFindAll_thenReturnListCustomers() { 
+		// given
 		List<CustomerEntity> listFound = new ArrayList<CustomerEntity>();
+		
+        // when
         listFound = customerService.getAllCustomers();
      
         // then
