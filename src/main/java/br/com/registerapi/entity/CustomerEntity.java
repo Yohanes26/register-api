@@ -38,6 +38,11 @@ public class CustomerEntity {
     @Column(name = "created_at")
     private Timestamp createAt;
 
+    public void setCustomerEntity(String name, Integer age) {
+    	this.name = name;
+    	this.age = age;
+    }
+    
 	public Long getId() {
 		return id;
 	}

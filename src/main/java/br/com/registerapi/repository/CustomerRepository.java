@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import br.com.registerapi.entity.CustomerEntity;
 
-
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Long>{
 
