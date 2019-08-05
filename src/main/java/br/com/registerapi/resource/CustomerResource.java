@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.registerapi.model.CustomerModel;
+import br.com.registerapi.service.CustomerService;
 
 @RestController
 public class CustomerResource implements CustomerResourceApi{
@@ -24,7 +25,7 @@ public class CustomerResource implements CustomerResourceApi{
 	@Override
 	public ResponseEntity<CustomerModel> createCustomer(@Valid @RequestBody CustomerModel customerModel, HttpServletRequest request) {
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(customerService.create(customerModel, request.getRemoteAddr()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customerModel, request.getRemoteAddr()));
 	}
 	
 	@Override
