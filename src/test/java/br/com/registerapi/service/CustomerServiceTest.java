@@ -40,11 +40,11 @@ public class CustomerServiceTest {
 	
 	@Before
 	public void setUp() {
-		Optional<CustomerEntity> customer;
-		customer.get().setCustomerEntity("Paulo Alex", 45);
-		customer.get().setId(1L);
-	    Mockito.when(customerRepository.findById(customer.get().getId()))
-	      .thenReturn(customer);
+		CustomerEntity customer = new CustomerEntity();
+		customer.setCustomerEntity("Paulo Alex", 45);
+		customer.setId(1L);
+	    Mockito.when(customerRepository.findById(customer.getId()))
+	      .thenReturn(Optional.of(customer));
 	}
 	
 	@Test
@@ -54,14 +54,14 @@ public class CustomerServiceTest {
 		customerModel.setCustomerModel("Pedro Paulo", 70);
 		
         // when
-		CustomerEntity customerEntity = new CustomerEntity();
-		customerEntity = customerService.create(customerModel, null);
+		CustomerModel customerNewModel = new CustomerModel();
+		customerNewModel = customerService.createCustomer(customerModel, null);
      
         // then
-		if (Objects.nonNull(customerEntity)) {
-			assertThat(customerEntity.getId(), notNullValue());
+		if (Objects.nonNull(customerNewModel)) {
+			assertThat(customerNewModel.getId(), notNullValue());
 		} else {
-			assertThat(customerEntity, notNullValue());
+			assertThat(customerNewModel, notNullValue());
 		}
 		
     }
@@ -73,25 +73,25 @@ public class CustomerServiceTest {
 		customerModel.setCustomerModel("Pedro Paulo", 70);
 		
         // when
-		CustomerEntity customerEntity = new CustomerEntity();
-		customerEntity = customerService.updateCustomer(1L, customerModel);
+		CustomerModel customerNewModel = new CustomerModel();
+		customerNewModel = customerService.updateCustomer(1L, customerModel);
      
         // then
-		if (Objects.nonNull(customerEntity)) {
-			assertThat(customerEntity.getId(), notNullValue());
+		if (Objects.nonNull(customerNewModel)) {
+			assertThat(customerNewModel.getId(), notNullValue());
 		} else {
-			assertThat(customerEntity, notNullValue());
+			assertThat(customerNewModel, notNullValue());
 		}
 		
-		assertThat(customerEntity.getName(), is(customerModel.getName()));
-		assertThat(customerEntity.getAge(), is(customerModel.getAge()));
+		assertThat(customerNewModel.getName(), is(customerModel.getName()));
+		assertThat(customerNewModel.getAge(), is(customerModel.getAge()));
 		
     }
 	
 	@Test
     public void whenFindAll_thenReturnListCustomers() { 
 		// given
-		List<CustomerEntity> listFound = new ArrayList<CustomerEntity>();
+		List<CustomerModel> listFound = new ArrayList<CustomerModel>();
 		
         // when
         listFound = customerService.getAllCustomers();
@@ -106,7 +106,7 @@ public class CustomerServiceTest {
     	Long customerId = 1L;
      
         // when
-        Optional<CustomerEntity> found = customerService.getById(customerId);
+        Optional<CustomerModel> found = customerService.getById(customerId);
      
         // then
         if (found.isPresent()) {
