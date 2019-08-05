@@ -49,7 +49,7 @@ public class CustomerResourceTest {
 					.accept(MediaType.APPLICATION_JSON_UTF8)
 					
 		)
-			.andExpect(MockMvcResultMatchers.status().isCreated());
+			.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
 	@Test
@@ -88,8 +88,8 @@ public class CustomerResourceTest {
 	@Test
 	public void testDeleteCustomerById() throws Exception {
 		mockMvc.perform(
-				delete("/v1/customer/1")
+				delete("/v1/customer/{id}", 1)
 		)
-			.andExpect(MockMvcResultMatchers.status().isNoContent());
+			.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 }

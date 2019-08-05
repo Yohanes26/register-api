@@ -9,6 +9,7 @@ import static org.mockito.Mockito.times;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.hamcrest.collection.IsEmptyCollection;
 import org.hamcrest.core.IsNull;
@@ -37,10 +38,10 @@ public class CustomerServiceTest {
 	
 	@Before
 	public void setUp() {
-		CustomerEntity customer = new CustomerEntity();
-		customer.setCustomerEntity("Paulo Alex", 45);
-		customer.setId(1L);
-	    Mockito.when(customerRepository.getOne(customer.getId()))
+		Optional<CustomerEntity> customer = Optional.of(new CustomerEntity());
+		customer.get().setCustomerEntity("Paulo Alex", 45);
+		customer.get().setId(1L);
+	    Mockito.when(customerRepository.findById(customer.get().getId()))
 	      .thenReturn(customer);
 	}
 	
@@ -138,7 +139,7 @@ public class CustomerServiceTest {
     	Long customerId = 1L;
     	
         // when
-		customerService.getCustomerById(customerId);
+		customerService.deleteCustomerById(customerId);
      
         // then
         Mockito.verify(customerRepository, times(1))
