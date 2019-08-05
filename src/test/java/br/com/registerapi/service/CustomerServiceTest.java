@@ -154,7 +154,7 @@ public class CustomerServiceTest {
     	Long customerId = 2L;
      
         // when
-        customerService.deleteById(customerId);
+        customerService.deleteCustomerById(customerId);
     }
 	
 	@Test(expected = ApiException.class)
@@ -163,6 +163,6 @@ public class CustomerServiceTest {
     	Long customerId = 2L;
      
         // when
-        customerService.deleteById(customerId);
+        customerService.deleteCustomerById(customerId);
     }
 }
