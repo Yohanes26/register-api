@@ -90,7 +90,7 @@ public class CustomerResourceTest {
 					.accept(MediaType.APPLICATION_JSON_UTF8)
 		)
 			.andExpect(MockMvcResultMatchers.status().isOk())
-			.andExpect(jsonPath("$.*", Matchers.hasEntry(String.class, ArrayList.class)));
+			.andExpect(jsonPath("$", Matchers.anything()));
 	}
 	
 	@Test
