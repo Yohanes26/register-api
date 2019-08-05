@@ -43,8 +43,8 @@ public class CustomerServiceTest {
 		CustomerEntity customer = new CustomerEntity();
 		customer.setCustomerEntity("Paulo Alex", 45);
 		customer.setId(1L);
-	    Mockito.when(customerRepository.findById(customer.getId()))
-	      .thenReturn(Optional.of(customer));
+	    Mockito.when(customerRepository.getOne(customer.getId()))
+	      .thenReturn(customer);
 	}
 	
 	@Test
@@ -106,13 +106,13 @@ public class CustomerServiceTest {
     	Long customerId = 1L;
      
         // when
-        Optional<CustomerModel> found = customerService.getById(customerId);
+        CustomerModel found = customerService.getCustomerById(customerId);
      
         // then
-        if (found.isPresent()) {
-        	assertThat(found.get().getName(), is("Paulo Alex"));
+        if (Objects.nonNull(found)) {
+        	assertThat(found.getName(), is("Paulo Alex"));
         } else {
-        	assertThat(found.get(), IsNull.notNullValue());
+        	assertThat(found, IsNull.notNullValue());
         }
         
     }
@@ -123,7 +123,7 @@ public class CustomerServiceTest {
     	Long customerId = null;
      
         // when
-        customerService.getById(customerId);
+        customerService.getCustomerById(customerId);
     }
 	
 	@Test(expected = ApiException.class)
@@ -132,7 +132,7 @@ public class CustomerServiceTest {
     	Long customerId = 2L;
      
         // when
-        customerService.getById(customerId);
+        customerService.getCustomerById(customerId);
     }
 	
 	@Test
@@ -141,7 +141,7 @@ public class CustomerServiceTest {
     	Long customerId = 1L;
     	
         // when
-		customerService.deleteById(customerId);
+		customerService.getCustomerById(customerId);
      
         // then
         Mockito.verify(customerRepository, times(1))
