@@ -48,6 +48,7 @@ public class CustomerResource implements CustomerResourceApi{
 	
 	@Override
 	public ResponseEntity<CustomerModel> deleteCustomerById(@PathVariable(value = "id") Long id) {
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(customerService.deleteCustomerById(id));
+		customerService.deleteCustomerById(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 }
