@@ -24,7 +24,7 @@ public class CustomerResource implements CustomerResourceApi{
 	@Override
 	public ResponseEntity<CustomerModel> createCustomer(@Valid @RequestBody CustomerModel customerModel, HttpServletRequest request) {
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(customerService.create(customerModel));
+		return ResponseEntity.status(HttpStatus.CREATED).body(customerService.create(customerModel, request.getRemoteAddr()));
 	}
 	
 	@Override
