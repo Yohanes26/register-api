@@ -1,6 +1,5 @@
 package br.com.registerapi.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -8,17 +7,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.times;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import org.hamcrest.collection.IsEmptyCollection;
 import org.hamcrest.core.IsNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -32,7 +29,7 @@ import br.com.registerapi.repository.CustomerRepository;
 @RunWith(SpringRunner.class)
 public class CustomerServiceTest {
 
-	@Autowired
+	@InjectMocks
 	private CustomerService customerService;
 	
 	@MockBean
