@@ -1,5 +1,7 @@
 package br.com.registerapi.resource;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -19,7 +21,7 @@ import io.swagger.annotations.ApiResponses;
 public interface CustomerResourceApi {
 
 	@CrossOrigin
-    @ApiOperation(value = "Customer", nickname = "customer", notes = "Create a customer.", tags={"customer"})
+    @ApiOperation(value = "createCustomer", nickname = "createCustomer", notes = "Create a customer.", tags={"customer"})
         @ApiResponses(value = { 
             @ApiResponse(code = 201, message = "CREATED"),
             @ApiResponse(code = 400, message = "invalid input, object invalid") })
@@ -30,7 +32,7 @@ public interface CustomerResourceApi {
     ResponseEntity<CustomerModel> createCustomer(@Valid @RequestBody CustomerModel customerModel);
 	
 	@CrossOrigin
-    @ApiOperation(value = "Customer", nickname = "customer", notes = "Update a customer.", tags={"customer"})
+    @ApiOperation(value = "UpdateCustomer", nickname = "UpdateCustomer", notes = "Update a customer.", tags={"customer"})
         @ApiResponses(value = { 
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 400, message = "invalid input, object invalid") })
@@ -39,4 +41,33 @@ public interface CustomerResourceApi {
     consumes = {"application/json"},
     method = RequestMethod.PUT)
 	public ResponseEntity<CustomerModel> updateCustomer(@PathVariable(value = "id") Long id, @Valid @RequestBody CustomerModel customerModel);
+	
+	@CrossOrigin
+    @ApiOperation(value = "getCustomer", nickname = "getCustomer", notes = "Get a customer by id.", tags={"customer"})
+        @ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "invalid input, object invalid") })
+	@RequestMapping(value = "/v1/customer/{id}",
+    produces = {"application/json"},
+    method = RequestMethod.GET)
+	public ResponseEntity<CustomerModel> getCustomerById(@PathVariable(value = "id") Long id);
+	
+	@CrossOrigin
+    @ApiOperation(value = "getAllCustomers", nickname = "getAllCustomers", notes = "Get all customers.", tags={"customer"})
+        @ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "invalid input, object invalid") })
+	@RequestMapping(value = "/v1/customers",
+    produces = {"application/json"},
+    method = RequestMethod.GET)
+	public ResponseEntity<List<CustomerModel>> getAllCustomers();
+	
+	@CrossOrigin
+    @ApiOperation(value = "deleteCustomer", nickname = "deleteCustomer", notes = "Delete customer by id.", tags={"customer"})
+        @ApiResponses(value = { 
+            @ApiResponse(code = 204, message = "NO CONTENT"),
+            @ApiResponse(code = 400, message = "invalid input, object invalid") })
+	@RequestMapping(value = "/v1/customer/{id}",
+    method = RequestMethod.DELETE)
+	public ResponseEntity<CustomerModel> deleteCustomerById(@PathVariable(value = "id") Long id);
 }
