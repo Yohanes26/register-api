@@ -77,10 +77,10 @@ ALTER TABLE customers.customers OWNER TO root;
 --
 
 --
--- Name: customers_seq; Type: SEQUENCE; Schema: customers; Owner: root
+-- Name: customer_seq; Type: SEQUENCE; Schema: customers; Owner: root
 --
 
-CREATE SEQUENCE customers.customers_seq
+CREATE SEQUENCE customers.customer_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -88,7 +88,7 @@ CREATE SEQUENCE customers.customers_seq
     CACHE 1;
 
 
-ALTER TABLE customers.customers_seq OWNER TO root;
+ALTER TABLE customers.customer_seq OWNER TO root;
 
 --
 --
