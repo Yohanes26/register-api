@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "6b05209d-2ba1-4e66-b828-c71f1002154e",
+		"name": "Register-Api",
+		"description": "Requisições utilizadas para teste local de api de cadastro de clientes.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ee418e4-ab34-4d37-94e4-cc2dbc5ee1e2",
+						"exec": [
+							"pm.test(\"Resposta 201 CREATED\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"ID cliente criado: \" + pm.response.json().id, function () {",
+							"    pm.expect(pm.response.text()).to.include(\"id\");",
+							"    pm.environment.set('id', pm.response.json().id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3489abf7-cc7c-471d-ab7a-bb73b911259f",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"João Floripa\",\n\t\"age\": 31\n}\u0001"
+				},
+				"url": {
+					"raw": "localhost:8080/v1/customer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"customer"
+					]
+				},
+				"description": "Criar um cliente"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Customers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "16d6be61-0d82-41f0-817f-af383b6d77ba",
+						"exec": [
+							"pm.test(\"Resposta 200 OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/v1/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"customers"
+					]
+				},
+				"description": "Recebe lista de todos os clientes"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8ba32d10-4a22-49f1-a1a3-74c634117827",
+						"exec": [
+							"pm.test(\"Resposta 200 OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"João Floripas\",\n\t\"age\": 31\n}\u0001"
+				},
+				"url": {
+					"raw": "localhost:8080/v1/customer/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"customer",
+						"{{id}}"
+					]
+				},
+				"description": "Update de cliente"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer By Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a0eff89-13fb-4248-b4a7-10691e4bd77d",
+						"exec": [
+							"pm.test(\"Resposta 200 OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/v1/customer/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"customer",
+						"{{id}}"
+					]
+				},
+				"description": "Recebe os dados de um cliente buscado pelo id"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Customer By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/v1/customer/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"customer",
+						"{{id}}"
+					]
+				},
+				"description": "Deleta um cliente pelo seu ID."
+			},
+			"response": []
+		}
+	]
+}
