@@ -31,7 +31,7 @@ public class CustomerResource implements CustomerResourceApi{
 	@Override
 	public ResponseEntity<CustomerModel> updateCustomer(@PathVariable(value = "id") Long id, @Valid @RequestBody CustomerModel customerModel) {
 		
-		return ResponseEntity.ok().body(customerService.update(customerModel));
+		return ResponseEntity.ok().body(customerService.updateCustomer(id, customerModel));
 	}
 	
 	@Override
@@ -43,7 +43,7 @@ public class CustomerResource implements CustomerResourceApi{
 	@Override
 	public ResponseEntity<List<CustomerModel>> getAllCustomers() {
 		
-		return ResponseEntity.ok().body(customerService.getAllCustomers);
+		return ResponseEntity.ok().body(customerService.getAllCustomers());
 	}
 	
 	@Override
