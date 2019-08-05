@@ -56,3 +56,10 @@ Esse comando executará os dockers para que você tenha acesso a uma base postgr
 
 - Acesso ao Swagger - localhost:8080/swagger-ui.html
 
+# Testes Unitários #
+
+Projeto acompanha os testes unitários garantindo sempre a consistencia da informação.
+
+Temos tbm teste de requisição na pasta  `/postman`, temos uma collection de requisições e um arquivo de variavel de ambiente contendo um id para executar os testes automatizados via postman.
+
+
