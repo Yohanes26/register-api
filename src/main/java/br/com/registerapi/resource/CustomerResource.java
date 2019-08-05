@@ -1,6 +1,5 @@
 package br.com.registerapi.resource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;

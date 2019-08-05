@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,36 +14,39 @@ import java.util.Optional;
 
 import org.hamcrest.collection.IsEmptyCollection;
 import org.hamcrest.core.IsNull;
-import org.hibernate.service.spi.InjectService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import br.com.registerapi.RegisterApiApplication;
 import br.com.registerapi.config.ApiException;
 import br.com.registerapi.entity.CustomerEntity;
 import br.com.registerapi.model.CustomerModel;
 import br.com.registerapi.repository.CustomerRepository;
 
 @RunWith(SpringRunner.class)
+@SpringBootTest(classes = RegisterApiApplication.class)
 public class CustomerServiceTest {
 
+	@Autowired
 	@InjectMocks
 	private CustomerService customerService;
 	
-	@MockBean
+	@Mock
     private CustomerRepository customerRepository;
 	
 	@Before
 	public void setUp() {
-		Optional<CustomerEntity> customer = Optional.of(new CustomerEntity());
-		customer.get().setCustomerEntity("Paulo Alex", 45);
-		customer.get().setId(1L);
-	    Mockito.when(customerRepository.findById(customer.get().getId()))
-	      .thenReturn(customer);
+		CustomerEntity customer = new CustomerEntity();
+		customer.setCustomerEntity("Jhon snow", 31);
+		customer.setId(1L);
+		when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
 	}
 	
 	@Test
@@ -66,12 +70,17 @@ public class CustomerServiceTest {
 	
 	@Test
     public void whenUpdateCustomer_thenReturnCustomerNewValue() { 
-		// given
+		// given		
+		CustomerEntity customer = new CustomerEntity();
+		customer.setCustomerEntity("Jhon snow", 31);
+		customer.setId(1L);
+		when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
 		CustomerModel customerModel = new CustomerModel();
 		customerModel.setCustomerModel("Pedro Paulo", 70);
 		
         // when
 		CustomerModel customerNewModel = new CustomerModel();
+		
 		customerNewModel = customerService.updateCustomer(1L, customerModel);
      
         // then
@@ -90,7 +99,7 @@ public class CustomerServiceTest {
     public void whenFindAll_thenReturnListCustomers() { 
 		// given
 		List<CustomerModel> listFound = new ArrayList<CustomerModel>();
-		
+	    
         // when
         listFound = customerService.getAllCustomers();
      
@@ -140,10 +149,12 @@ public class CustomerServiceTest {
     	
         // when
 		customerService.deleteCustomerById(customerId);
+		
+		Optional<CustomerEntity> customerEntity = customerRepository.findById(customerId);
      
         // then
         Mockito.verify(customerRepository, times(1))
-        .deleteById(customerId);;
+        .delete(customerEntity.get());
     }
 	
 	@Test(expected = ApiException.class)
@@ -158,7 +169,7 @@ public class CustomerServiceTest {
 	@Test(expected = ApiException.class)
     public void whenDeleteByIdNull_thenReturnApiException() {
         // given
-    	Long customerId = 2L;
+    	Long customerId = null;
      
         // when
         customerService.deleteCustomerById(customerId);

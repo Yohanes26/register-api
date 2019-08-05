@@ -21,6 +21,9 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
 	
+	@Autowired
+	private GeolocationService geolocationService;
+	
 	@Transactional
 	public CustomerModel createCustomer(CustomerModel customerModel, String ip) {
 		
@@ -36,10 +39,12 @@ public class CustomerService {
 		customerEntity.setCustomerEntity(customerModel.getName(), customerModel.getAge());
 		try {
 			customerEntity = customerRepository.save(customerEntity);
+			geolocationService.saveGeolocationAndWoeid(customerEntity.getId(), ip);
 		} catch (Exception ex) {
 			throw new ApiException("Algum erro aconteceu ao salvar as informações", 500, ex);
 		} 
 		
+		customerModel = new CustomerModel();
 		customerModel.setCustomerModel(customerEntity.getName(), customerEntity.getAge());
 		customerModel.setId(customerEntity.getId());
 		
@@ -59,7 +64,7 @@ public class CustomerService {
 		
 		Optional<CustomerEntity> customerEntity = customerRepository.findById(id);
 		
-		if (!customerEntity.isPresent()) {
+		if (!Objects.nonNull(customerEntity)) {
 			String msg = "Dados não encontrados para o ID: " + id;
 			throw new ApiException(msg, 404);
 		}
@@ -80,6 +85,7 @@ public class CustomerService {
 		if (id == null) {
 			throw new ApiException("Id não pode ser nulo para pesquisa", 400);
 		}
+		
 		Optional<CustomerEntity> customerEntity = customerRepository.findById(id);
 		
 		if (!customerEntity.isPresent()) {

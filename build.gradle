@@ -30,6 +30,8 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 		
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
+		
 	compile("org.postgresql:postgresql:42.1.4.jre7")
 		
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
@@ -51,8 +53,9 @@ dependencies {
 	testCompile("org.springframework.boot:spring-boot-test-autoconfigure:${springBootVersion}")
 	
 	testCompile("org.springframework:spring-test")
+		
+	testCompile group: 'junit', name: 'junit', version: '4.12'
 	
-	testCompile("junit:junit")
 	
 	testCompile("org.assertj:assertj-core")
 	
