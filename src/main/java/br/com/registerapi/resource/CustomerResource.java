@@ -3,6 +3,7 @@ package br.com.registerapi.resource;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class CustomerResource implements CustomerResourceApi{
 	private CustomerService customerService;
 	
 	@Override
-	public ResponseEntity<CustomerModel> createCustomer(@Valid @RequestBody CustomerModel customerModel) {
+	public ResponseEntity<CustomerModel> createCustomer(@Valid @RequestBody CustomerModel customerModel, HttpServletRequest request) {
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(customerService.create(customerModel));
 	}

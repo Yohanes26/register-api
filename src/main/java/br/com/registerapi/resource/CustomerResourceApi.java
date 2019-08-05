@@ -2,6 +2,7 @@ package br.com.registerapi.resource;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public interface CustomerResourceApi {
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<CustomerModel> createCustomer(@Valid @RequestBody CustomerModel customerModel);
+    ResponseEntity<CustomerModel> createCustomer(@Valid @RequestBody CustomerModel customerModel, HttpServletRequest request);
 	
 	@CrossOrigin
     @ApiOperation(value = "UpdateCustomer", nickname = "UpdateCustomer", notes = "Update a customer.", tags={"customer"})
