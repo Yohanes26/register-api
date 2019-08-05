@@ -1,5 +1,7 @@
 package br.com.registerapi.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.transaction.Transactional;
@@ -54,7 +56,15 @@ public class CustomerService {
 			throw new ApiException("Atributo 'name' não pode ser nulo", 400);
 		}
 		
-		CustomerEntity customerEntity = map.map(customerModel, CustomerEntity.class);
+		CustomerEntity customerEntity = customerRepository.getOne(id);
+		
+		if (!Objects.nonNull(customerEntity)) {
+			String msg = "Dados não encontrados para o ID: {}";
+			throw new ApiException(String.format(msg, id), 404);
+		}
+		
+		fillEntity(customerEntity, customerModel);
+		
 		try {
 			customerEntity = customerRepository.save(customerEntity);
 		} catch (Exception ex) {
@@ -63,5 +73,41 @@ public class CustomerService {
 		
 		
 		return map.map(customerEntity, CustomerModel.class);
+	}
+	
+	@Transactional
+	public CustomerModel getCustomerById(Long id) {
+		
+		if (id == null) {
+			throw new ApiException("Id não pode ser nulo para pesquisa", 400);
+		}
+		
+		CustomerEntity customerEntity = customerRepository.getOne(id);
+		
+		if (!Objects.nonNull(customerEntity)) {
+			String msg = "Dados não encontrados para o ID: {}";
+			throw new ApiException(String.format(msg, id), 404);
+		}	
+		
+		return map.map(customerEntity, CustomerModel.class);
+	}
+	
+	@Transactional
+	public List<CustomerModel> getAllCustomers() {
+
+		List<CustomerEntity> listCustomerEntity = new ArrayList<CustomerEntity>();
+		listCustomerEntity = customerRepository.findAll();
+		
+		List<CustomerModel> listCustomerModel = new ArrayList<CustomerModel>();
+		
+		listCustomerEntity.forEach(customer -> {
+			listCustomerModel.add(map.map(customer, CustomerModel.class));
+		});
+		
+		return listCustomerModel;
+	}
+	
+	private void fillEntity(CustomerEntity customerEntity, CustomerModel customerModel) {
+		customerEntity.setCustomerEntity(customerModel.getName(), customerModel.getAge());
 	}
 }
