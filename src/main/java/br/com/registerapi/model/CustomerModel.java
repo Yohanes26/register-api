@@ -1,5 +1,6 @@
 package br.com.registerapi.model;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -13,15 +14,20 @@ public class CustomerModel {
 	private Long id;
     
 	@NotNull
-	@Size(max = 255)
+	@Size(min = 1, max = 255)
     @JsonProperty("name")
     private String name;
     
 	@NotNull
-	@Size(max = 3)
+	@Max(150)
     @JsonProperty("age")
 	private Integer age;
 
+	public void setCustomerModel (String name, Integer age) {
+		this.name = name;
+		this.age = age;
+	} 
+	
 	public Long getId() {
 		return id;
 	}
