@@ -1,7 +1,4 @@
 # Register API #
-A Documentação da api se encontra no link: http://register-api.us-east-1.elasticbeanstalk.com
-
-Documentação Swagger: http://register-api.us-east-1.elasticbeanstalk.com/swagger-ui.html
 
 Aplicação visa conceder o cadastro, update, deleção e seleção de clientes, além de no ato do cadastro pegar a geolocalização do usuário e com isso conseguir a temperatura mínima e máxima do dia da solicitação do cadastro.
 
@@ -88,7 +85,5 @@ Na pasta  `/postman`, temos uma collection de requisições e um arquivo de variáv
 
 # Deploy #
 
-Para a documentação não ficar grande, resolvi não implementar uma pipeline no jenkins e fazer o deploy direto pelo Elastic BeansTalk na AWS, segue o link de auxílio para deploy feito pela própria AWS.
-
-Link: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_Java.html
+Para a documentação não ficar grande, resolvi não fazer o deploy pois, como não tem pipeline e não haverá troca de variável de ambiente no processo, e a instalação da aplicação por ec2Intance seria demasiadamente cara para manter nessa poc.
 
