@@ -124,11 +124,6 @@ CREATE TABLE customers.geolocation (
     id bigint NOT NULL,
     customer_id bigint NOT NULL,
     ipv4 character varying(20),
-    continent_name character varying(55),
-    country_name character varying(55),
-    subdivision_1_name character varying(55),
-    subdivision_2_name character varying(55),
-    city_name character varying(55),
     latitude character varying(30),
     longitude character varying(30),
     created_at timestamp without time zone NOT NULL
@@ -191,11 +186,7 @@ ALTER TABLE ONLY customers.geolocation
 CREATE TABLE customers.woeid (
     id bigint NOT NULL,
     customer_id bigint NOT NULL,
-    distance bigint,
-    title character varying(120),
-    location_type character varying(120),
     woeid bigint,
-    latt_long character varying(80),
     created_at timestamp without time zone NOT NULL
 );
 
@@ -257,7 +248,6 @@ CREATE TABLE customers.weather (
     customer_id bigint NOT NULL,
     max_temp character varying(80),
     min_temp character varying(80),
-    applicable_date timestamp without time zone,
     created_at timestamp without time zone NOT NULL
 );
 

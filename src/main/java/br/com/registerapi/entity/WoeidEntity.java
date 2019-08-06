@@ -1,6 +1,6 @@
 package br.com.registerapi.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,24 +31,12 @@ public class WoeidEntity {
     @Column(name = "customer_id")
     private Long customerId;
 
-	@Column(name = "distance")
-	private Long distance;
-	
-	@Column(name = "title")
-	private String title;
-	
-	@Column(name = "location_type")
-	private String locationType;
-	
 	@Column(name = "woeid")
 	private Long woeid;
-	
-	@Column(name = "latt_long")
-	private String lattLong;
-    
+
     @CreationTimestamp
-    @Column(name = "created_at")
-    private Timestamp createAt;
+    @Column(name = "created_at", updatable=false)
+    private Date createAt;
     
 	public Long getId() {
 		return id;
@@ -58,11 +46,11 @@ public class WoeidEntity {
 		this.id = id;
 	}
 
-	public Timestamp getCreateAt() {
+	public Date getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(Timestamp createAt) {
+	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
 
@@ -74,30 +62,6 @@ public class WoeidEntity {
 		this.customerId = customerId;
 	}
 
-	public Long getDistance() {
-		return distance;
-	}
-
-	public void setDistance(Long distance) {
-		this.distance = distance;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getLocationType() {
-		return locationType;
-	}
-
-	public void setLocationType(String locationType) {
-		this.locationType = locationType;
-	}
-
 	public Long getWoeid() {
 		return woeid;
 	}
@@ -106,11 +70,4 @@ public class WoeidEntity {
 		this.woeid = woeid;
 	}
 
-	public String getLattLong() {
-		return lattLong;
-	}
-
-	public void setLattLong(String lattLong) {
-		this.lattLong = lattLong;
-	}
 }

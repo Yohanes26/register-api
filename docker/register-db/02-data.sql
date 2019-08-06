@@ -25,21 +25,21 @@ INSERT INTO customers.customers (id, name, age, created_at) values (nextval('cus
 -- Data for Name: geolocation; Type: TABLE DATA; Schema: customers; Owner: root
 --
 
-INSERT INTO customers.geolocation (id, customer_id, ipv4, continent_name, country_name, subdivision_1_name, subdivision_2_name, city_name, latitude, longitude, created_at)     values (nextval('customers.geolocation_seq'), 1, '8.8.8.8', 'North America', 'United States', 'California', null, 'Mountain View', '37.38600', '-122.08380', '2019-08-02 01:29:00.575000');
+INSERT INTO customers.geolocation (id, customer_id, ipv4, latitude, longitude, created_at)     values (nextval('customers.geolocation_seq'), 1, '8.8.8.8', '37.38600', '-122.08380', '2019-08-02 01:29:00.575000');
 
 --
 -- Data for Name: woeid; Type: TABLE DATA; Schema: customers; Owner: root
 --
 
-INSERT INTO customers.woeid (id, customer_id, distance, title, location_type, woeid, latt_long, created_at) 
-    values (nextval('customers.woeid_seq'), 1, 1599, 'Mountain View', 'City', 2455920, '37.39999,-122.079552', '2019-08-02 01:29:00.575000');
+INSERT INTO customers.woeid (id, customer_id, woeid, created_at) 
+    values (nextval('customers.woeid_seq'), 1, 2455920, '2019-08-02 01:29:00.575000');
 
 --
 -- Data for Name: weather; Type: TABLE DATA; Schema: customers; Owner: root
 --
 
-INSERT INTO customers.weather (id, customer_id, max_temp, min_temp, applicable_date, created_at) 
-    values (nextval('customers.weather_seq'), 1, '26.14', '16.055', '2019-08-02', '2019-08-02 01:29:00.575000');
+INSERT INTO customers.weather (id, customer_id, max_temp, min_temp, created_at) 
+    values (nextval('customers.weather_seq'), 1, '26.14', '16.055', '2019-08-02 01:29:00.575000');
 
 --
 -- PostgreSQL database dump complete

@@ -35,22 +35,7 @@ public class GeolocationEntity {
     
 	@Column(name = "ipv4")
 	private String ipv4;
-    		
-	@Column(name = "continent_name")
-	private String continentName;
-	
-	@Column(name = "country_name")
-	private String countryName;
-	
-	@Column(name = "subdivision_1_name")
-	private String subdivision1Name;
-	
-	@Column(name = "subdivision_2_name")
-	private String subdivision2Name;
-							
-	@Column(name = "city_name")
-	private String cityName;
-    												
+    				
 	@Column(name = "latitude")
 	private String latitude;
 	
@@ -58,7 +43,7 @@ public class GeolocationEntity {
 	private String longitude;
     
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "created_at", updatable=false)
     private Timestamp createAt;
     
 	public Long getId() {
@@ -91,46 +76,6 @@ public class GeolocationEntity {
 
 	public void setIpv4(String ipv4) {
 		this.ipv4 = ipv4;
-	}
-
-	public String getContinentName() {
-		return continentName;
-	}
-
-	public void setContinentName(String continentName) {
-		this.continentName = continentName;
-	}
-
-	public String getCountryName() {
-		return countryName;
-	}
-
-	public void setCountryName(String countryName) {
-		this.countryName = countryName;
-	}
-
-	public String getSubdivision1Name() {
-		return subdivision1Name;
-	}
-
-	public void setSubdivision1Name(String subdivision1Name) {
-		this.subdivision1Name = subdivision1Name;
-	}
-
-	public String getSubdivision2Name() {
-		return subdivision2Name;
-	}
-
-	public void setSubdivision2Name(String subdivision2Name) {
-		this.subdivision2Name = subdivision2Name;
-	}
-
-	public String getCityName() {
-		return cityName;
-	}
-
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
 	}
 
 	public String getLatitude() {

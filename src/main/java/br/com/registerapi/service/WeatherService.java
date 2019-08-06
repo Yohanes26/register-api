@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.registerapi.entity.WeatherEntity;
 import br.com.registerapi.model.WeatherModel;
-import br.com.registerapi.model.WeatherWrapper;
 import br.com.registerapi.repository.WeatherRepository;
 import br.com.registerapi.utils.ExternalRequest;
 

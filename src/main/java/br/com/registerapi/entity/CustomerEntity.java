@@ -35,7 +35,7 @@ public class CustomerEntity {
     private Integer age;
     
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "created_at", updatable=false)
     private Timestamp createAt;
 
     public void setCustomerEntity(String name, Integer age) {

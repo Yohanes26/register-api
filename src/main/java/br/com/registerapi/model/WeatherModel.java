@@ -2,46 +2,24 @@ package br.com.registerapi.model;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.hibernate.annotations.CreationTimestamp;
-
-@Entity
-@Table(schema = "customers", name = "weather",
-indexes = {
-        @Index(columnList = "id")
-})
 public class WeatherModel {
 
-    /**
-     * Id da tabela weather (auto gerado)
-     */
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(generator = "weatherGenerator")
-    @SequenceGenerator(name = "weatherGenerator", schema = "customers", sequenceName = "weather_seq", allocationSize = 1)
+    @JsonIgnore
     private Long id;
     
-    @Column(name = "customer_id")
+    @JsonProperty("customer_id")
     private Long customerId;
     
-	@Column(name = "max_temp")
+    @JsonProperty("max_temp")
 	private String maxTemp;
 	
-	@Column(name = "min_temp")
+    @JsonProperty("min_temp")
 	private String minTemp;
-	
-	@Column(name = "applicable_date")
-	private Timestamp applicableDate;
     
-    @CreationTimestamp
-    @Column(name = "created_at")
+    @JsonProperty("created_at")
     private Timestamp createAt;
     
 	public Long getId() {
@@ -82,14 +60,6 @@ public class WeatherModel {
 
 	public void setMinTemp(String minTemp) {
 		this.minTemp = minTemp;
-	}
-
-	public Timestamp getApplicableDate() {
-		return applicableDate;
-	}
-
-	public void setApplicableDate(Timestamp applicableDate) {
-		this.applicableDate = applicableDate;
 	}
 
 }

@@ -2,63 +2,27 @@ package br.com.registerapi.model;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.hibernate.annotations.CreationTimestamp;
-
-@Entity
-@Table(schema = "customers", name = "geolocation",
-indexes = {
-        @Index(columnList = "id")
-})
 public class GeolocationModel {
 
-    /**
-     * Id da Geolocalizacao (auto gerado)
-     */
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(generator = "geolocationGenerator")
-    @SequenceGenerator(name = "geolocationGenerator", schema = "customers", sequenceName = "geolocation_seq", allocationSize = 1)
+	@JsonIgnore
     private Long id;
     
-    @Column(name = "customer_id")
-    @NotNull
+    @JsonProperty("customer_id")
     private Long customerId;
     
-	@Column(name = "ipv4")
+    @JsonProperty("ipv4")
 	private String ipv4;
-    		
-	@Column(name = "continent_name")
-	private String continentName;
-	
-	@Column(name = "country_name")
-	private String countryName;
-	
-	@Column(name = "subdivision_1_name")
-	private String subdivision1Name;
-	
-	@Column(name = "subdivision_2_name")
-	private String subdivision2Name;
-							
-	@Column(name = "city_name")
-	private String cityName;
-    												
-	@Column(name = "latitude")
+    						
+    @JsonProperty("latitude")
 	private String latitude;
 	
-	@Column(name = "longitude")
+    @JsonProperty("longitude")
 	private String longitude;
     
-    @CreationTimestamp
-    @Column(name = "created_at")
+    @JsonProperty("created_at")
     private Timestamp createAt;
     
 	public Long getId() {
@@ -91,46 +55,6 @@ public class GeolocationModel {
 
 	public void setIpv4(String ipv4) {
 		this.ipv4 = ipv4;
-	}
-
-	public String getContinentName() {
-		return continentName;
-	}
-
-	public void setContinentName(String continentName) {
-		this.continentName = continentName;
-	}
-
-	public String getCountryName() {
-		return countryName;
-	}
-
-	public void setCountryName(String countryName) {
-		this.countryName = countryName;
-	}
-
-	public String getSubdivision1Name() {
-		return subdivision1Name;
-	}
-
-	public void setSubdivision1Name(String subdivision1Name) {
-		this.subdivision1Name = subdivision1Name;
-	}
-
-	public String getSubdivision2Name() {
-		return subdivision2Name;
-	}
-
-	public void setSubdivision2Name(String subdivision2Name) {
-		this.subdivision2Name = subdivision2Name;
-	}
-
-	public String getCityName() {
-		return cityName;
-	}
-
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
 	}
 
 	public String getLatitude() {

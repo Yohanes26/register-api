@@ -37,11 +37,8 @@ public class WeatherEntity {
 	@Column(name = "min_temp")
 	private String minTemp;
 	
-	@Column(name = "applicable_date")
-	private Timestamp applicableDate;
-    
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "created_at", updatable=false)
     private Timestamp createAt;
     
 	public Long getId() {
@@ -82,14 +79,6 @@ public class WeatherEntity {
 
 	public void setMinTemp(String minTemp) {
 		this.minTemp = minTemp;
-	}
-
-	public Timestamp getApplicableDate() {
-		return applicableDate;
-	}
-
-	public void setApplicableDate(Timestamp applicableDate) {
-		this.applicableDate = applicableDate;
 	}
 
 }
