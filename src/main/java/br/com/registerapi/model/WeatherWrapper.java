@@ -8,13 +8,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class WeatherWrapper {
 
 	@JsonProperty("consolidated_weather")
-	private List<WeatherModel> consolidatedWeather = new ArrayList<WeatherModel>();
+	private List<WeatherModel> consolidated_weather = new ArrayList<WeatherModel>();
 
 	public List<WeatherModel> getConsolidatedWeather() {
-		return consolidatedWeather;
+		return consolidated_weather;
 	}
 
-	public void setConsolidatedWeather(List<WeatherModel> consolidatedWeather) {
-		this.consolidatedWeather = consolidatedWeather;
+	public void setConsolidatedWeather(List<WeatherModel> consolidated_weather) {
+		this.consolidated_weather = consolidated_weather;
 	}	
 }

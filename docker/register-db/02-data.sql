@@ -39,7 +39,7 @@ INSERT INTO customers.woeid (id, customer_id, distance, title, location_type, wo
 --
 
 INSERT INTO customers.weather (id, customer_id, max_temp, min_temp, applicable_date, created_at) 
-    values (nextval('customers.weather_seq'), 1, 26.14, 16.055, '2019-08-02', '2019-08-02 01:29:00.575000');
+    values (nextval('customers.weather_seq'), 1, '26.14', '16.055', '2019-08-02', '2019-08-02 01:29:00.575000');
 
 --
 -- PostgreSQL database dump complete

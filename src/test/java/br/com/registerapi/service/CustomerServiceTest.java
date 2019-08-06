@@ -66,8 +66,14 @@ public class CustomerServiceTest {
 	@Test
     public void whenCreateCustomer_thenReturnCustomerWithId() { 
 		// given
+		CustomerEntity customer = new CustomerEntity();
+		customer.setCustomerEntity("Pedro Paulo", 70);
+		customer.setId(40L);
+		when(customerRepository.save(customer)).thenReturn(customer);
+		
 		CustomerModel customerModel = new CustomerModel();
 		customerModel.setCustomerModel("Pedro Paulo", 70);
+		customerModel.setId(40L);
 		
         // when
 		CustomerModel customerNewModel = new CustomerModel();
@@ -76,9 +82,7 @@ public class CustomerServiceTest {
         // then
 		if (Objects.nonNull(customerNewModel)) {
 			assertThat(customerNewModel.getId(), notNullValue());
-		} else {
-			assertThat(customerNewModel, notNullValue());
-		}
+		} 
 		
     }
 	

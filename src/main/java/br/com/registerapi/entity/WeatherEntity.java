@@ -32,10 +32,10 @@ public class WeatherEntity {
     private Long customerId;
     
 	@Column(name = "max_temp")
-	private float maxTemp;
+	private String maxTemp;
 	
 	@Column(name = "min_temp")
-	private float minTemp;
+	private String minTemp;
 	
 	@Column(name = "applicable_date")
 	private Timestamp applicableDate;
@@ -68,19 +68,19 @@ public class WeatherEntity {
 		this.customerId = customerId;
 	}
 
-	public float getMaxTemp() {
+	public String getMaxTemp() {
 		return maxTemp;
 	}
 
-	public void setMaxTemp(float maxTemp) {
+	public void setMaxTemp(String maxTemp) {
 		this.maxTemp = maxTemp;
 	}
 
-	public float getMinTemp() {
+	public String getMinTemp() {
 		return minTemp;
 	}
 
-	public void setMinTemp(float minTemp) {
+	public void setMinTemp(String minTemp) {
 		this.minTemp = minTemp;
 	}
 

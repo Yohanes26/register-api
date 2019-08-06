@@ -255,8 +255,8 @@ ALTER TABLE ONLY customers.woeid
 CREATE TABLE customers.weather (
     id bigint NOT NULL,
     customer_id bigint NOT NULL,
-    max_temp DECIMAL(7,5),
-    min_temp DECIMAL(7,5),
+    max_temp character varying(80),
+    min_temp character varying(80),
     applicable_date timestamp without time zone,
     created_at timestamp without time zone NOT NULL
 );

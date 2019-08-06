@@ -37,17 +37,26 @@ public class CustomerService {
 		
 		CustomerEntity customerEntity = new CustomerEntity();
 		customerEntity.setCustomerEntity(customerModel.getName(), customerModel.getAge());
+		
+		if (Objects.nonNull(customerModel.getId())) {
+			customerEntity.setId(customerModel.getId());
+		}
+		
 		try {
 			customerEntity = customerRepository.save(customerEntity);
-			geolocationService.saveGeolocationAndWoeid(customerEntity.getId(), ip);
+			if (customerEntity != null) {
+				geolocationService.saveGeolocationAndWoeid(customerEntity.getId(), ip);
+			}
+
 		} catch (Exception ex) {
 			throw new ApiException("Algum erro aconteceu ao salvar as informações", 500, ex);
 		} 
 		
-		customerModel = new CustomerModel();
-		customerModel.setCustomerModel(customerEntity.getName(), customerEntity.getAge());
-		customerModel.setId(customerEntity.getId());
-		
+		if (customerEntity != null) {
+			customerModel = new CustomerModel();
+			customerModel.setCustomerModel(customerEntity.getName(), customerEntity.getAge());
+			customerModel.setId(customerEntity.getId());			
+		}
 		return customerModel;
 	}
 	

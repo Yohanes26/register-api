@@ -29,6 +29,10 @@ task buildSubModules() {
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    
+	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+		
+	compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
 		
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
 		
@@ -60,9 +64,7 @@ dependencies {
 	testCompile("org.assertj:assertj-core")
 	
 	testCompile("org.mockito:mockito-core")
-	
-	testCompile("com.jayway.jsonpath:json-path")
-	
+		
 	testCompile("org.hamcrest:hamcrest-core")
 	
 	testCompile("org.hamcrest:hamcrest-library")

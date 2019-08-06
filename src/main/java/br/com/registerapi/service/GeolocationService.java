@@ -8,13 +8,9 @@ import br.com.registerapi.entity.GeolocationEntity;
 import br.com.registerapi.model.GeolocationWrapper;
 import br.com.registerapi.repository.GeolocationRepository;
 import br.com.registerapi.utils.ExternalRequest;
-import ma.glasnost.orika.MapperFacade;
 
 @Service
 public class GeolocationService {
-
-	@Autowired
-	private MapperFacade modelMapper;
 	
 	@Autowired
 	private ExternalRequest externalRequest;
@@ -28,10 +24,12 @@ public class GeolocationService {
 	@Async
 	public void saveGeolocationAndWoeid(Long customerId, String ip) {
 		GeolocationWrapper geolocationWrapper = externalRequest.getGeolocation(ip);
-		geolocationWrapper.getData().setCustomerId(customerId);
 		
 		GeolocationEntity geolocation = new GeolocationEntity();
-		geolocation = modelMapper.map(geolocationWrapper.getData(), GeolocationEntity.class);
+		geolocation.setCustomerId(customerId);
+		geolocation.setIpv4(geolocationWrapper.getData().getIpv4());
+		geolocation.setLatitude(geolocationWrapper.getData().getLatitude());
+		geolocation.setLongitude(geolocationWrapper.getData().getLongitude());
 		
 		geolocationRepository.save(geolocation);
 		

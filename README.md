@@ -82,3 +82,11 @@ Na pasta  `/postman`, temos uma collection de requisições e um arquivo de variáv
 - Não se fez necessário aplicar Kubernetes nesse projeto, porém se tratando de um alto nível de requisições o Kubernetes pode nos ajudar a escalar horizontalmente a aplicação atendendo a um número alto de chamadas.
 - WebConfig -> Aplicado configuração para liberar cors.
 - SwaggerUi -> Utilizado o SwaggerUi para fornecer uma documentação que ajuda visualmente quem vai integrar com a solução, podendo também montar uma documentação no Swaggerhub e exportar para o ApiGateway, onde pensando em um cenário de altas requisições, o Apigateway trabalha muito bem com as cargas e distribuição das mesmas.
+
+
+# Deploy #
+
+Para a documentação não ficar grande, resolvi não implementar uma pipeline no jenkins e fazer o deploy direto pelo Elastic BeansTalk na AWS, segue o link de auxílio para deploy feito pela própria AWS.
+
+Link: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_Java.html
+
