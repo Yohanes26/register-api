@@ -1,5 +1,7 @@
 # Register API #
-A Documentação da api se encontra no link: 
+A Documentação da api se encontra no link: http://register-api.us-east-1.elasticbeanstalk.com
+
+Documentação Swagger: http://register-api.us-east-1.elasticbeanstalk.com/swagger-ui.html
 
 Aplicação visa conceder o cadastro, update, deleção e seleção de clientes, além de no ato do cadastro pegar a geolocalização do usuário e com isso conseguir a temperatura mínima e máxima do dia da solicitação do cadastro.
 
